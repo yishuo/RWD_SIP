@@ -1,0 +1,176 @@
+/* the first part */
+a, a:visited {
+	outline:none;
+	color:#389dc1;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+section, footer, header, aside, nav{
+	display: block;
+}
+
+/*-------------------------
+	The edit tooltip
+--------------------------*/
+
+p{
+/*	font-size:80px;*/
+	font-size:200%;
+	font-weight:bold;
+	color: yellow;
+	cursor:default;
+}
+
+p b{
+	color:#ffffff;
+	display:inline-block;
+	padding:5px 10px;
+	background-color:#c4d7e0;
+	border-radius:2px;
+	text-transform:uppercase;
+	font-size:18px;
+}
+
+p:before{
+	/*Ajouter un icon.*/
+	/*content:'✎';*/
+	display:inline-block;
+	margin-right:5px;
+	font-weight:normal;
+	vertical-align: text-bottom;
+}
+
+#main{
+	height:300px;
+	position:relative;
+/*	padding-top: 80px;*/
+padding-top: 10%;
+}
+
+
+
+
+
+
+
+/* the second part */
+#total{
+text-align: center;
+}
+    
+#headImg{
+    position: relative;
+}
+
+#main{
+    text-align: center;
+    color: yellow;
+    /*font-size: 20%;*/
+    position:absolute;
+    right: 15%;
+    bottom: 10%;
+    left: 15%;
+    top: 0;
+}
+
+#main h1{
+    font-size: 150%;
+}
+
+/*        #main h1{
+  color: blue;
+  position: absolute;
+  left: 5%;
+  top: 5%;
+}  */
+
+.col-md-6.offset6{
+    /*width: 250px;*/
+    width: 20%;
+    /*width: 100px;*/
+    float: right;
+    padding-top: 0px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+      
+#backgroundColor{
+    width: 30px;
+    height: 30px;
+    float: right;
+}
+#today{
+    width: 30px;
+    width: 30px;
+    float: right;
+}
+
+#hide{
+    width: 30px;
+    width: 30px;
+    float: right;
+}
+#show{
+    width: 30px;
+    width: 30px;
+    float: right;
+}
+
+.datepicker{
+    width: 200%;
+}
+.navbar .navbar-inner {
+    padding: 0;
+}
+.navbar .nav {
+    margin: 0;
+    display: table;
+    width: 100%;
+}
+.navbar .nav li {
+    display: table-cell;
+    width: 20%;
+    float: none;
+}
+.navbar .nav li a {
+    color: orange;
+    font-weight: bold;
+    text-align: center;
+    border-left: 1px solid rgba(255,255,255,.75);
+    border-right: 1px solid rgba(0,0,0,.1);
+}
+.navbar .nav li:first-child a {
+    border-left: 0;
+    border-radius: 3px 0 0 3px;
+}
+.navbar .nav li:last-child a {
+    border-right: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+      /*les button differents couleurs representent les differents important.*/
+.important button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+}
+/* .norm button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+}
+
+.plus button span {
+    background-color: red;
+    border-radius: 32px;
+    color: black;
+}*/
+
+.return button span{
+    background-color: white;
+    color: black;
+} 

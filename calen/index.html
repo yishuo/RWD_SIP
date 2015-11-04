@@ -1,0 +1,212 @@
+<!doctype html>
+  <html ng-app="MonCalendrier">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js\angular.js"></script>
+    <script src="js\angular-ui-bootstrap.js"></script>
+    <script src="js\example.js"></script>
+    <script type="js\animation.js"></script>
+    <link rel="stylesheet" type="text/css" href="css\bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css\bootstrap-responsive.min.css">
+    <link rel="stylesheet" type="text/css" href="css\example.css">
+  </head>
+
+  <body>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\start of the first control/////////////////////////////////////////// -->    
+    <div id="total"   ng-controller="calendrier">
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\start of the second control/////////////////////////////////////////// -->
+    <div id="headImg" ng-controller="CarouselCtrl" ng-show="slidesLooping">
+      
+      <div id="imgLoop">
+        
+        <carousel interval="myInterval" no-wrap="noWrapSlides" >
+          <slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
+            <div class="carousel-caption">
+              <p>{{slide.text}}</p>
+            </div>
+          </slide>
+        </carousel>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\start of the third control/////////////////////////////////////////// -->
+
+<!--         <div class="row-fluid">
+  <div class="span4 offset10"> -->
+            <div id="main" ng-controller="InlineEditorController" ng-click="hideTooltip()">
+              <div class="tooltip" ng-click="$event.stopPropagation()" ng-show="showtooltip">
+                <input type="text" ng-model="value" />
+              </div>
+              <p ng-click="toggleTooltip($event)">{{value}}</p>
+              <h1><b>Bienvenue a&#768; mon calendrier.</b></h1>
+            </div>
+<!--           </div>
+        </div> -->
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end of the third control/////////////////////////////////////////// -->
+
+
+        <div class="row-fluid">
+          <div class="col-md-6 offset6">
+            <input type="number" class="form-control" ng-model="myInterval" placeholder="Enter a negative number or 0 to stop the interval.">
+            <div class="checkbox">
+              <label style="color:white">
+                <input type="checkbox" ng-model="noWrapSlides">
+                  Disable Slide Looping
+              </label>
+            </div>
+          </div>
+        </div>
+      
+      </div> 
+    
+    </div>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end of the second control/////////////////////////////////////////// -->
+
+    <div style='background:{{backgroundColor}}'>
+      <!-- Ajouter un filtre. -->
+      <pre>Selected date is: <em>{{dt | date:'fullDate' }}</em></pre>
+      <img id="hide" type="button" src="img\hide.png" ng-show="hideImg" ng-click="showEtHide()" />
+      <img id="show" type="button" src="img\show.png" ng-show="showImg" ng-click="showEtHide()" />
+      <img id="backgroundColor" type="button" src="img\bg.png" ng-click="backcolor()" ng-dblclick="returnWhite()"/>
+      <img id="today" type="button" src="img\today.png" ng-click="returnToday()" />
+      
+      <div><br/></dir>
+      
+      <!-- Use bootstrap. -->
+      <div class="row-fluid">
+        <div class="span4">
+          <span>&nbsp;</span>
+        </div>
+        
+        <div class="span4" style="display:inline-block; width:300px;">
+        
+          <datepicker id="myCalen" ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sp" custom-class="getDayClass(date, mode)" ng-dblclick="important()"></datepicker> 
+        
+          <script type="text/ng-template" id="myModalContent.html">
+          
+            <div class="modal-header">
+
+              <h3 class="modal-title" ng-show="title1">Input your new events.</h3>
+            
+              <h3 class="modal-title" ng-show="title2">The list of your events.</h3>
+          
+            </div>
+          
+            <div class="modal-body">
+            
+              <div ng-show="events">
+                <textarea rows="7" cols="30" placeholder="Add your activities." ng-model="newEvent"></textarea>
+              </div>
+            
+              <div ng-show="eventsList">
+                <table>
+                  <tr ng-repeat="item in items track by $index">
+                    <td>{{ item }}</td>
+                    <td><a href ng-click="remove(item)"> &nbsp;&nbsp; Delete</a></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          
+            <div class="modal-footer">
+          
+              <button class="btn btn-primary" ng-show="addButton" ng-click="add()">Add</button>
+          
+              <button class="btn btn-primary" ng-show="saveButton" ng-click="save()">Save</button>
+          
+              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+          
+            </div>
+        
+          </script>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\start of the fourth control/////////////////////////////////////////// -->
+          <div class="row-fluid">
+            <div class="span6 offset5">
+              <div  ng-controller="ModalCtrl">
+                <button class="btn btn-info" ng-click="open('sm')" style="text-align:center">Activities</button>
+              </div>
+            </div>
+          </div>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end of the fourth control/////////////////////////////////////////// -->
+        </div>
+
+        <div class="span4">
+          <span>&nbsp;</span>
+        </div>
+
+      </div>
+
+<!--       <div><br/></dir>  --> 
+      
+<!--       <div class="masthead">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <ul class="nav">
+          <li class="active" style="background-color: #B5B5B5"><a ng-click="return()">Original</a></li>
+          <li style="background-color: green"><a ng-click="importantMoins()">Moins Important</a></li>
+          <li style="background-color: orange"><a ng-click="importantNormal()">Normal</a></li>
+          <li style="background-color: red"><a ng-click="importantPlus()">Plus Important</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+      <div id="iconConnect">  
+        <div class="row-fluid">
+          <div class="span3">
+            &nbsp;
+          </div>
+          <div class="span6">
+            <br /><br />
+            <p> <a href="https://www.facebook.com/yishuo.lyu" target="_blank"><img src="img/facebook.jpg" alt="facebook" width=5% height=5%></a>&nbsp;&nbsp;
+            <a href="https://twitter.com/YishuoLyu/?lang=fr" target="_blank"><img src="img/twitter.jpg" alt="twitter" width=5% height=5%></a>&nbsp;&nbsp;
+            <a href="https://www.linkedin.com/profile/view?id=373278673&trk=nav_responsive_tab_profile_pic" target="_blank"><img src="img/linkedin.jpg" alt="linkedin" width=5% height=5%></a>&nbsp;&nbsp;
+            <a href="https://plus.google.com/u/0/" target="_blank"><img src="img/googleplus.jpg" alt="googleplus" width=5% height=5%></a>&nbsp;&nbsp; 
+            <a href="https://github.com/yishuo" target="_blank"><img src="img/github.jpg" alt="github" width=5% height=5%></a></p>
+          </div>
+          <div class="span3">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+
+
+      <div class="masthead">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li class="active" style="background-color: #0000CD"><a href="https://www.facebook.com/yishuo.lyu" target="_blank">F+</a></li>
+                <li style="background-color: #87CEEB"><a href="https://twitter.com/YishuoLyu/?lang=fr" target="_blank">T+</a></li>
+                <li style="background-color: #1E90FF"><a href="https://www.linkedin.com/profile/view?id=373278673&trk=nav_responsive_tab_profile_pic" target="_blank">L+</a></li>
+                <li style="background-color: #DC143C"><a href="https://plus.google.com/u/0/" target="_blank">Gg+</a></li>
+                <li style="background-color: #000000"><a href="https://github.com/yishuo" target="_blank">Gh+</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/////////////////////////////////////////// -->
+
+    </div>
+  </div>
+
+
+    <hr style="border:1px solid black;" />
+    
+    <footer>
+      <div class="row-fluid">
+        <div class="span3"></div>
+        <div class="span6">      
+          <span>copyright &copy;2015 <b><a href="https://www.cetic.be/">CETIC</a></b>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All rights reserved.</span>
+        </div>
+        <div class="span3"></div>
+      </div>
+    </footer>
+<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\end of the first control/////////////////////////////////////////// -->
+  </body>
+
+</html>
